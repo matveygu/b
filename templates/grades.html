@@ -1,10 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Школьный дневник</title>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
 </head>
 <body>
-$END$
+<header>
+    <h1>Добро пожаловать в школьный дневник</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="/home">Главная</a></li>
+        <li><a href="/home">Домашние задания</a></li>
+        <li><a href="/home">Оценки</a></li>
+        <li style="float:right"><a href="/">Выход</a></li>
+        <li style="float:right"><a href="/profile">Профиль</a></li>
+    </ul>
+</nav>
+<form action="/class" method="post">
+    <label for="clas">Класс:</label>
+    <select name="clas" id="clas">
+        {% for cl in class_list %}
+            <option value={{ cl }}>{{ cl }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Выбрать класс</button>
+</form>
+
+<h1>Выставление оценок</h1>
+
+    <h2>Студенты:</h2>
+    <ul>
+        {% for student, grades in students.items() %}
+            <li>
+                <strong>{{ student }}</strong>:
+                {% for lesson, grade in grades.items() %}
+                    {{lesson}} - {{ ', '.join(grade) }}
+                {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Выставить оценку:</h2>
+    <form action="/grade" method="post">
+        <label for="student">Студент:</label>
+        <select name="student" id="student">
+            {% for student in students %}
+                <option value="{{ student }}">{{ student }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="subject">Предмет:</label>
+        <select name="subject" id="subject">
+            {% for l in less_list %}
+                 <option value={{ l }}>{{ l }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="grade">Оценка:</label>
+        <input type="number" name="grade" id="grade" min="1" max="5">
+        <label for="time">На какое число(год-месяц-день):</label>
+        <input type="text" name="time" id="time">
+        <br>
+        <button type="submit">Выставить оценку</button>
+    </form>
+<footer>
+    <p>Школьный дневник</p>
+</footer>
 </body>
 </html>

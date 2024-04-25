@@ -1,10 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Школьный дневник</title>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
 </head>
 <body>
-$END$
+<header>
+    <h1>Добро пожаловать в школьный дневник</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="/home">Главная</a></li>
+        <li><a href="/home">Домашние задания</a></li>
+        <li><a href="/teachers">Учителя</a></li>
+        <li style="float:right"><a href="/">Выход</a></li>
+        <li style="float:right"><a href="/profile">Профиль</a></li>
+    </ul>
+</nav>
+    <div id="schedule">
+        <table>
+            <tr>
+                <th>Учитель</th>
+                <th>Предмет</th>
+                <th>Школа</th>
+            </tr>
+            {% for teacher in teachers %}
+            <tr>
+                <td>{{ teacher[1] }}</td>
+                <td>{{ teacher[2] }}</td>
+                <td>{{ teacher[3] }}</td>
+                <td>
+                    <form action="/delete_teacher/{{ teacher[0] }}" method="post">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <h2>Добавить новый урок</h2>
+    <form action="/add_teacher" method="post">
+        <label for="teacher">Учитель:</label>
+        <input type="text" id="teacher" name="teacher" required>
+        <label for="subject">Предмет:</label>
+        <input type="text" id="subject" name="subject" required>
+        <label for="school">Школа:</label>
+        <input type="text" id="school" name="school" required>
+        <button type="submit">Добавить учителя</button>
+    </form>
+<footer>
+    <p>Школьный дневник</p>
+</footer>
 </body>
 </html>

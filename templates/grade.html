@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Школьный дневник</title>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
 </head>
 <body>
-$END$
+<header>
+    <h1>Добро пожаловать в школьный дневник</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="/home">Главная</a></li>
+        <li><a href="/home">Домашние задания</a></li>
+        <li><a href="/grades">Оценки</a></li>
+        <li style="float:right"><a href="/">Выход</a></li>
+        <li style="float:right"><a href="/profile">Профиль</a></li>
+    </ul>
+</nav>
+    <h1>Оценки</h1>
+    {% for data, predmet in grades.items() %}
+        <li>
+            <strong>{{ data }}:</strong>
+            {% for grade in predmet %}
+                {% for lesson, gr in grade.items() %}
+                    <td>{{lesson}} - {{ gr }}</td>
+                {% endfor %}
+            {% endfor %}
+        </li>
+    {% endfor %}
+
+
+<footer>
+    <p>Школьный дневник</p>
+</footer>
 </body>
 </html>
