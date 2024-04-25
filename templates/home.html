@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Школьный дневник</title>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Добро пожаловать в школьный дневник</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="/home">Главная</a></li>
+        <li><a href="/home">Домашние задания</a></li>
+        <li><a href="/grades">Оценки</a></li>
+        <li style="float:right"><a href="/">Выход</a></li>
+        <li style="float:right"><a href="/profile">Профиль</a></li>
+    </ul>
+</nav>
+<form action="/home" method="post">
+        <label for="date">Выберите дату:</label>
+        <input type="date" id="date" name="date">
+        <input type="submit" value="Показать расписание">
+    </form>
+    <h1>Расписание уроков</h1>
+
+    <div id="schedule">
+        <table>
+            <tr>
+                <th>День</th>
+                <th>Номер урока</th>
+                <th>Предмет</th>
+                <th>Время</th>
+                <th>Учитель</th>
+                <th>Оценка за урок</th>
+            </tr>
+            {% for lesson in lessons %}
+            <tr>
+                <td>{{ lesson[1] }}</td>
+                <td>{{ lesson[2] }}</td>
+                <td>{{ lesson[3] }}</td>
+                <td>{{ lesson[4] }}</td>
+                <td>{{ lesson[5] }}</td>
+                {% if lesson[3] in grade_list %}
+                    <td>{{ ', '.join(grade_list[lesson[3]]) }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+<footer>
+    <p>Школьный дневник</p>
+</footer>
+</body>
+</html>

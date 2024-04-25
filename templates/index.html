@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Школьный дневник</title>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Добро пожаловать в школьный дневник</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="/home">Главная</a></li>
+        <li><a href="/home">Домашние задания</a></li>
+        <li><a href="/teachers">Учителя</a></li>
+        <li style="float:right"><a href="/">Выход</a></li>
+        <li style="float:right"><a href="/profile">Профиль</a></li>
+    </ul>
+</nav>
+    <div id="schedule">
+        <table>
+            <tr>
+                <th>День</th>
+                <th>Номер урока</th>
+                <th>Предмет</th>
+                <th>Время</th>
+                <th>Учитель</th>
+                <th>Школа</th>
+                <th>Класс</th>
+            </tr>
+            {% for lesson in lessons %}
+            <tr>
+                <td>{{ lesson[1] }}</td>
+                <td>{{ lesson[2] }}</td>
+                <td>{{ lesson[3] }}</td>
+                <td>{{ lesson[4] }}</td>
+                <td>{{ lesson[5] }}</td>
+                <td>{{ lesson[7] }}</td>
+                <td>{{ lesson[6] }}</td>
+                <td>
+                    <form action="/delete_lesson/{{ lesson[0] }}" method="post">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <h2>Добавить новый урок</h2>
+    <form action="/add_lesson" method="post">
+        <label for="day">День:</label>
+        <input type="text" id="day" name="day" required>
+        <label for="number">Номер урока:</label>
+        <input type="text" id="number" name="number" required>
+        <label for="subject">Предмет:</label>
+        <input type="text" id="subject" name="subject" required>
+        <label for="time">Время:</label>
+        <input type="text" id="time" name="time" required>
+        <label for="ticher">Учитель:</label>
+        <input type="text" id="ticher" name="ticher" required>
+        <label for="school">Школа:</label>
+        <input type="text" id="school" name="school" required>
+        <label for="class">Класс:</label>
+        <input type="text" id="class" name="class" required>
+        <button type="submit">Добавить урок</button>
+    </form>
+<footer>
+    <p>Школьный дневник</p>
+</footer>
+</body>
+</html>

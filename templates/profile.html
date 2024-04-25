@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    <title>Профиль школьного дневника</title>
+    </style>
+</head>
+<nav>
+    <ul>
+        <li><a href="/home">Главная</a></li>
+        <li><a href="/home">Домашние задания</a></li>
+        <li><a href="/home">Оценки</a></li>
+        <li style="float:right"><a href="/">Выход</a></li>
+    </ul>
+</nav>
+<body>
+    <div class="profile">
+        <h1>Профиль ученика</h1>
+        <p><strong>Имя:</strong> {{ name }}</p>
+        <p><strong>Класс:</strong> {{ classes }}</p>
+        <p><strong>Школа:</strong> {{ school }}</p>
+        <p><strong>Тип учётной записи:</strong> {{ type }}</p>
+    </div>
+<footer>
+    <p>Школьный дневник</p>
+</footer>
+</body>
+</html>
